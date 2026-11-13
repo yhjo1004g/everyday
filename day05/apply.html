@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="https://www.httpbin.org/post" method="post">
+        <p>
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" requied>
+        </p>
+         <p>
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" requied>
+        </p>
+         <p>
+           <label for="pw">비밀번호</label>
+            <input type="password" id="pw" name="password" requied>
+        </p>
+    <fieldset>
+        <legend>학년</legend>
+        <input type="radio" id="g1" name="grade" value="1">
+        <label for="g1">1학년</label>
+        <input type="radio" id="g2" name="grade" value="2">
+        <label for="g2">2학년</label>
+        <input type="radio" id="g3" name="grade" value="3">
+        <label for="g3">3학년</label>
+        <input type="radio" id="g4" name="grade" value="4">
+        <label for="g4">4학년</label>
+    </fieldset>
+    <fieldset>
+        <legend>관심 분야</legend>
+        <input type="checkbox" id="fe" name="interest" value="frontend">
+        <label for="fe">프론트엔드</label>
+        <input type="checkbox" id="be" name="interest" value="backend">
+        <label for="be">백엔드</label>
+        <input type="checkbox" id="db" name="interest" value="DB">
+        <label for="db">DB</label>
+    </fieldset>
+    <p>
+        <label for="course">신청 과목</lebel>
+        <select id="course" name="course">
+            <option value="CS101">웹 프로그래밍 기초</option>
+            <option value="CS102">자바 입문</option>
+            <option value="DB201">데이터베이스</option>
+            <option value="CS103">알고리즘 기초</option>
+        </select>
+    </p>
+    <p><label for="start">희망 시작일</label>
+        <input type="date" id="start" name="start"></p>
+    <p><label for="memo">하고 싶은 말</label><br>
+        <textarea id="memo" name="memo" rows="4"></textarea></p>
+    <p><button type="submit">신청</button>
+        <button type="reset">다시 쓰기</button></p>
+     </form>
+</body>
+</html>
