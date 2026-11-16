@@ -1,0 +1,92 @@
+/* 선택자 연습: 과제를 하나씩 풀고, 저장할 때마다 화면을 확인한다
+   막히면 아래 힌트를 읽는다. 답 전체는 강사에게 */
+
+/* 과제 1: 모든 글자를 짙은 회색(#333)으로
+   힌트: body에 color를 주면 안쪽 글자가 물려받는다(상속) */
+
+
+/* 과제 2: h1과 h2를 남색(navy)으로, 한 규칙에서
+   힌트: 선택자 두 개를 쉼표로 이어 쓴다 */
+
+
+/* 과제 3: 공지 두 개만 배경을 연노랑(lightyellow)으로
+   힌트: class 선택자는 앞에 점(.)을 붙인다. HTML의 class="notice"에는 점이 없다 */
+
+
+/* 과제 4: "중요 공지"만 굵게(font-weight: 700)
+   힌트: 중요 공지는 class가 두 개(notice important)다. 공지 두 개 중 이것만 가진 class는? */
+
+
+/* 과제 5: 품절 두 개에 취소선(text-decoration: line-through)과 회색(gray) */
+
+
+/* 과제 6: 메뉴 링크만 밑줄을 없애고(text-decoration: none) 초록(green)으로
+   힌트: "nav 안의 a" = nav와 a 사이에 공백 */
+
+
+/* 과제 7: 메뉴 링크에 마우스를 올리면 밑줄이 생기게
+   힌트: 6번 선택자 뒤에 :hover */
+
+
+/* 과제 8: 소개 구역(id="intro")만 왼쪽에 굵은 선(border-left: 4px solid navy)
+   힌트: id 선택자는 앞에 # */
+
+
+/* 과제 9: footer 글자를 작게(font-size: 0.875rem) */
+
+body {
+    background: #ff9838;
+    color: #333;
+    padding: 24px 16px;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    border-bottom: 4px solid lightyellow
+}
+h1, h2 {
+    color: navy;
+}
+.notice {
+    border-bottom: 4px solid lightyellow
+}
+.important {
+    font-size: 700rem;
+}
+.sold-out {
+    line-through
+}
+nav a {
+    text-decoration;
+    color: green;
+}
+nav a:hover {
+    background: #ac5300;
+    color: #000000;
+    padding: 24px 16px;
+    font-size: 1rem;
+    letter-spacing: 0em;
+    border-bottom: 4px solid lightyellow
+}
+#intro {
+    background: #ff9838;
+    color: #333;
+    padding: 24px 16px;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    border-bottom: 4px solid lightyellow
+}
+footer {
+    background: #071646;
+    color: #ffffff;
+    padding: 24px 16px;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    border-bottom: 4px solid lightyellow
+}
+section {
+    background: #994a00;
+    color: #333;
+    padding: 24px 16px;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    border-bottom: 4px solid lightyellow
+}

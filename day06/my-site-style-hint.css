@@ -1,0 +1,22 @@
+/* my-site/css/style.css 힌트 (6일차)
+   세 페이지(index, about, courses)의 <head> title 아래에 똑같이:
+   <link rel="stylesheet" href="css/style.css">
+   한 줄 쓰고 저장 → 메뉴로 세 페이지를 오가며 확인 */
+
+/* 시연: 머리 (속성 6개)
+   header → background(진한 색) / color(white) / padding(24px 16px) /
+            font-size(1.125rem) / letter-spacing(0.05em) / border-bottom(4px solid 강조색) */
+
+/* 실습 1: 꼬리를 시연에서 본 속성으로
+   footer → background(옅은 색) / color(#666) / padding(16px) /
+            text-align(center) / font-size(0.875rem) / border-top(1px solid #ddd) */
+
+/* 실습 2: 6일차 PPT 맨 뒤 부록(CSS 속성 정리표)에서 골라 하나씩 더
+   예) body → margin 0, font-family, line-height 1.6, color #333
+       h2   → color, border-bottom, padding-bottom
+       nav a → color white, font-weight 700, text-decoration none
+       main  → padding 0 16px (본문이 화면 끝에 붙지 않게)
+   한 줄 넣을 때마다 저장하고, 무엇이 바뀌었는지 옆에 주석으로 적는다 */
+
+/* 색은 예시. 내 색 두 가지(진한 색 하나, 옅은 색 하나)를 정해 바꾼다
+   메뉴 배치(가로 한 줄)는 다음 시간 Flex로 */
