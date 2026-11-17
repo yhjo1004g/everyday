@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상자 모델</title>
+  <style>
+    /* 6단계에서 여기(맨 위)에 box-sizing 한 줄을 넣는다 */
+    *,*::before, *::after {
+      box-sizing: border-box;
+    }
+    .box {
+      width: 200px;
+      background: lightblue;
+      /* 3단계: padding 20px → Computed 상자 그림에서 바깥 크기 확인 */
+      /* 4단계: border 5px solid navy */
+      /* 5단계: margin 20px → 상자 그림 맨 바깥 칸 확인 */
+      padding: 20px;
+      border: 5px solid navy;
+      margin: 20px;
+    }
+    a, span {
+      width: 200px;
+      margin: 30px;
+      background: pink;
+      display: inline-block;
+    }
+  
+
+    /* 7단계: a, span에 width 200px, margin 30px, background pink
+       → 무엇이 안 먹는지 본 뒤 display: inline-block 추가 */
+  </style>
+</head>
+<body>
+  <div class="box">상자 A</div>
+  <div class="box">상자 B</div>
+  <p>문단 안의 <a href="#">링크</a>와 <span>스팬</span></p>
+</body>
+</html>

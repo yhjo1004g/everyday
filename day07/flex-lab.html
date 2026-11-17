@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flex 실험판</title>
+  <style>
+    .box-wrap {
+      border: 2px dashed #999;
+      height: 500px;
+      /* 여기에 display: flex; 를 넣고, 아래 ①~⑧을 한 줄씩 넣으며 저장·확인한다
+         줄마다 옆에 주석으로 결과를 적는다
+
+         ① gap: 16px;
+         ② justify-content: center;
+         ③ justify-content: space-between;   (②를 바꾼다)
+         ④ align-items: center;
+         ⑤ flex-direction: column;          → ②·④의 효과가 어떻게 바뀌나? 본 뒤 지운다
+         ⑥ (⑤를 지우고) 두 번째 .box에만 style="flex: 1"
+         ⑦ 상자를 8개로 늘리고 .box에 width: 200px;  → 찌그러지나 넘치나?
+         ⑧ flex-wrap: wrap;
+      */
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+
+    }
+    .box {
+      background: lightblue;
+      border: 1px solid navy;
+      padding: 16px;
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="box-wrap">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+    <div class="box">5</div>
+  </div>
+</body>
+</html>

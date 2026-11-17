@@ -1,0 +1,20 @@
+/* my-site/css/style.css 바꾸기 힌트 (7일차)
+   블록 하나 바꾸고 저장 → 세 페이지를 메뉴로 오가며 확인 */
+
+/* 0. 파일 맨 위에 한 줄
+   *, *::before, *::after { box-sizing: border-box; } */
+
+/* ① 메뉴를 가로 한 줄로
+   nav ul → display: flex; gap: 16px; list-style: none; margin: 0; padding: 0;
+   nav a:hover → text-decoration: underline;  (어제 선택자 연습에서 쓴 것) */
+
+/* ② 머리 양끝: 왼쪽 이름, 오른쪽 메뉴
+   header 규칙에 더한다 → display: flex; justify-content: space-between; align-items: center;
+   header h1 → margin: 0;
+   (header의 직계 자식이 h1과 nav라서 둘이 아이템.) */
+
+/* ③ 본문 가운데
+   main → max-width: 800px; margin: 0 auto; padding: 16px;
+   확인: 창을 넓혀도 본문 줄이 너무 길어지지 않는다 */
+
+/* 좁은 화면에서 머리가 답답한 것, 사진이 화면을 뚫는 것은 다음 시간에 */

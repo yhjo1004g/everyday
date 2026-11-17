@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수강신청 과목 카드</title>
+  <link rel="stylesheet" href="css/card.css">
+</head>
+<body>
+<main class="page">
+  <h1>수강신청</h1>
+  <p class="guide">담은 과목은 초록 테두리, 마감된 과목은 흐리게 보인다.</p>
+
+  <div class="course-list">
+    <div class="course-card">
+      <div class="course-name">웹 프로그래밍 기초 <span class="badge">필수</span></div>
+      <div class="course-info">CS101 · 3학점 · 월 1~2교시</div>
+      <div class="course-seat">정원 30 / 신청 12</div>
+    </div>
+
+    <div class="course-card selected">
+      <div class="course-name">데이터베이스 입문</div>
+      <div class="course-info">DB201 · 3학점 · 화 3~4교시</div>
+      <div class="course-seat">정원 25 / 신청 20</div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-name">운영체제</div>
+      <div class="course-info">CS205 · 3학점 · 목 5~6교시</div>
+      <div class="course-seat">정원 30 / 신청 8</div>
+    </div>
+
+    <div class="course-card full">
+      <div class="course-name">자료구조 <span class="badge">마감</span></div>
+      <div class="course-info">CS103 · 2학점 · 수 1~2교시</div>
+      <div class="course-seat">정원 25 / 신청 25</div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,84 @@
+/* 과목 카드 7일차: 어제 만든 card.css를 복사해 와서 이어서 고친다
+   HTML(course-card.html)은 새로 받는다: 카드가 4장, 전체를 <main class="page">가 감싼다 */
+
+/* 0. 파일 맨 위에 상자 계산 방식 한 줄
+   *, *::before, *::after { box-sizing: border-box; }
+   body의 padding은 지우고 margin: 0 */
+
+/* ① 실습 1 (상자 다듬기)
+   .course-card → border-radius 8px / padding 16px 20px / box-shadow 0 2px 6px rgb(0 0 0 / 10%)
+                  어제의 max-width, margin-bottom은 지운다 (③에서 gap이 맡는다)
+   .course-name → margin-bottom 8px
+   .badge       → display: inline-block / border-radius 999px / vertical-align: middle
+   확인: F12 → 카드 하나 고르기 → Computed 맨 위 상자 그림에서 padding 칸 숫자 */
+
+/* ② 본문 가운데 (실습 3)
+   .page → max-width 960px / margin: 0 auto / padding 16px
+   확인: 창을 넓히면 양옆이 같이 비고, 좁히면 꽉 찬다 */
+
+/* ③ 카드 가로 배치 (실습 3)
+   .course-list → display: flex / flex-wrap: wrap / gap 16px
+   .course-card → flex: 1 1 200px
+   확인: 창 폭을 줄이면 한 줄 카드 수가 줄어든다 */
+
+*,*::before, *::after {
+   box-sizing: border-box;
+}
+h1 {
+   font-size: 3rem;
+}
+p {
+   font-size: 1.5rem;
+}
+.course-card {
+   border-radius: 8px;
+   padding: 16px 20px;
+   box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+   flex: 1 1 200px;
+   border: 1px solid rgb(214, 214, 214);
+}
+.course-name {
+   margin-bottom: 8px;
+   font-size: 1.35rem;
+   font-weight: 700;
+} 
+.badge {
+   display: table;
+   border-radius: 999px;
+   vertical-align: middle;
+   background: red;
+   color: white;
+   flex-diredction: column;
+   align-items: flex-start;
+   gap: 6px;
+   padding: 2px 8px;
+   margin-top: 6px;
+   font-size: 1rem;
+}
+.page {
+   max-width: 960px;
+   margin: 0 auto;
+   padding: 16px;
+}
+.course-list {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 16px;
+}
+.course-card.selected {
+   border: 2px solid #eaf6f2;
+   background: #eaf6f2;
+   border: 1px solid black;
+}
+.course-card.full{
+   background: rgb(211, 211, 211);
+   color: #7c7c7c;
+}
+.course-card.full .badge {
+   background: gray;
+}
+.page {
+   max-width: 960px;
+   margin: 0 auto;
+   padding: 16px;
+}

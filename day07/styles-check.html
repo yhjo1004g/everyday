@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>반영된 규칙 찾기</title>
+  <!-- css 파일을 열지 말고, 개발자도구(Elements → Styles)만으로 화면에 반영된 규칙을 찾는다 -->
+  <link rel="stylesheet" href="css/styles-check.css">
+</head>
+<body>
+  <header class="top">
+    <h1>반영된 규칙 찾기</h1>
+  </header>
+  <main>
+    <section class="box">
+      <h2>구역 1</h2>
+      <p>평범한 문단입니다. 배경은 왜 이 색일까?</p>
+      <p class="notice">오늘의 공지: 이 글자는 왜 이 색일까?</p>
+    </section>
+    <section>
+      <h2>구역 2</h2>
+      <p>구역 1 밖의 문단입니다.</p>
+      <p><a href="#one">첫 번째 링크</a> · <a href="#two" class="plain">두 번째 링크</a></p>
+    </section>
+  </main>
+</body>
+</html>

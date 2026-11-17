@@ -1,0 +1,31 @@
+/* 반영된 규칙 찾기용 CSS: 학생은 이 파일을 열지 않는다 */
+body {
+  font-family: sans-serif;
+  color: #333;
+}
+
+.top {
+  text-align: center;
+  background: #ffe0b3;
+}
+
+p {
+  color: #0a8a00;
+  background: #fff36b;
+}
+
+.notice {
+  color: #e00000;
+}
+
+.box p {
+  background: #cfe8ff;
+}
+
+.box .notice {
+  color: #8a00d4;
+}
+
+a.plain {
+  text-decoration: none;
+}
