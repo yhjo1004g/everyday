@@ -9,3 +9,5 @@ right over there
 just have lot of the study much
 공부를 너무 많이 했다.
 표를 만들었다.
+사이트 페이스는 어느 정도 만든 기억이 있다.
+다시 복습한다.
