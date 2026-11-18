@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사진 · 표 넘침 시연</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; line-height: 1.6; }
+    header { background: #1f2a44; color: white; padding: 16px; }
+    header h1 { margin: 0; font-size: 1.25rem; }
+    main { padding: 16px; }
+
+    table { border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 8px 12px; white-space: nowrap; }  /* 칸 글자를 한 줄로 → 표가 넓어진다 */
+    thead th { background: #1f2a44; color: white; }
+
+    /* ① 사진이 화면을 뚫지 않게: 아래 주석을 풀어 본다 */
+    img { max-width: 100%; height: auto; }
+
+    /* ② 표만 옆으로 밀어 보게: 아래 주석을 풀어 본다 */
+    .table-wrap { overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>사진 · 표 넘침 시연</h1>
+  </header>
+
+  <main>
+    <h2>사진 한 장</h2>
+    <img src="image/big-photo.jpg" alt="언덕과 해가 있는 풍경 (가로 1200px)">
+    <p>가로 1200px 사진입니다. 기기 모드 375px에서 ① 주석을 풀기 전과 후를 비교합니다.</p>
+
+    <h2>수강 과목</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>과목 코드</th><th>과목명</th><th>학점</th><th>요일</th><th>시간</th><th>강의실</th><th>정원</th><th>신청</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CS101</td><td>웹 프로그래밍 기초</td><td>3</td><td>월 · 수</td><td>09:00~12:00</td><td>702호</td><td>30</td><td>신청</td></tr>
+          <tr><td>CS102</td><td>자바 입문</td><td>3</td><td>화 · 목</td><td>13:00~16:00</td><td>702호</td><td>30</td><td>신청</td></tr>
+          <tr><td>DB201</td><td>데이터베이스</td><td>2</td><td>금</td><td>09:00~12:00</td><td>703호</td><td>25</td><td>신청</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>② 주석을 풀기 전: 페이지 전체가 옆으로 밀린다. 푼 뒤: 표만 옆으로 밀린다.</p>
+  </main>
+</body>
+</html>

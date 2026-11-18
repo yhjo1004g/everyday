@@ -1,0 +1,32 @@
+/* my-site/css/style.css 8일차 힌트: 좁은 화면 + 세 페이지 정리
+   블록 하나 바꾸고 저장 → 기기 모드(Ctrl + Shift + M) 375px와 넓은 창을 오가며 확인 */
+
+/* ① 사진이 화면을 뚫지 않게
+   img { max-width: 100%; height: auto; } */
+
+/* ② 미디어 쿼리 하나 (파일 맨 아래에 둔다: 같으면 나중에 쓴 쪽이 이긴다)
+   @media (max-width: 599px) {
+     header { flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px; }
+     nav ul { flex-wrap: wrap; }
+   }
+   확인: 기기 모드 위쪽 너비를 599 ↔ 600 으로 바꿔 본다 */
+
+/* ③ 수강 과목 표 (courses.html)
+   HTML: <table>에 class="course-table", 숫자 칸 td에 class="num"
+         <table> 바깥을 <div class="table-wrap"> … </div> 로 감싼다
+   CSS : .course-table { border-collapse: collapse; }
+         .course-table th, .course-table td { border: 1px solid #ccc; padding: 8px 12px; white-space: nowrap; }
+         .course-table thead th { 진한 배경, 흰 글자 }
+         .course-table .num { text-align: right; }
+         .table-wrap { overflow-x: auto; }   → 페이지는 그대로, 표만 옆으로 밀어 본다
+   HTML 표의 border="1"은 지운다 (모양은 CSS가 맡는다) */
+
+/* ④ 연락 폼 (about.html)
+   label → display: block; font-weight: 700; margin-bottom: 4px;
+   input, select, textarea → width: 100%; max-width: 400px; padding: 8px; border; border-radius; font: inherit;
+   button → padding, 진한 배경, 흰 글자, border: 0, cursor: pointer
+   HTML의 <br>, cols="40" 같은 모양용 속성은 지운다 */
+
+/* ⑤ 카드 (index.html "요즘 배우는 것")
+   HTML: ol 대신 <div class="cards"> 안에 <article class="card"><h3>…</h3><p>…</p></article> 세 개
+   CSS : 과목 카드에서 쓴 방법 그대로 (.cards → flex, wrap, gap / .card → flex: 1 1 200px, 테두리, 둥근 모서리, padding) */
