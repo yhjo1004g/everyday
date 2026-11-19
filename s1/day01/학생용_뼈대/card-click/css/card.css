@@ -1,0 +1,67 @@
+/* 7일차: 상자 계산 방식 */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  color: #333;
+  margin: 0;
+}
+
+/* 본문 가운데 */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+}
+.guide { color: #666; }
+
+/* ③ 카드 목록: 가로로, 넘치면 다음 줄 */
+.course-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ① 카드 한 장: 상자 다듬기 */
+.course-card {
+  flex: 1 1 200px;           /* 기본 200px, 남으면 나눠 갖고 모자라면 줄어든다 */
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;        /* 둥근 모서리 */
+  padding: 16px 20px;        /* 위아래 16, 좌우 20 */
+  box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+}
+
+/* ② 카드 안 조각 */
+.course-card .course-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 8px;        /* 이름과 정보 사이 */
+}
+.course-card .course-info,
+.course-card .course-seat {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+/* 배지: inline-block이면 위아래 padding도 자리를 차지한다 */
+.badge {
+  display: inline-block;
+  background: #d9482b;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;      /* 알약 모양 */
+  vertical-align: middle;
+}
+
+/* 상태 class */
+.course-card.selected {
+  border: 2px solid #0e7c66;
+  background: #eaf6f2;
+}
+.course-card.full {
+  background: #f4f4f4;
+  color: #999;
+}
+.course-card.full .badge { background: #999; }

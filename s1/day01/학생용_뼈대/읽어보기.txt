@@ -1,0 +1,12 @@
+JavaScript 1일차 학생용 자료
+
+basics.html과 js/basics.js는 받지 않는다. 슬라이드를 보며 직접 만들고 따라 친다.
+
+card-click/          과목 카드 페이지 (everyday/s1/day01/에 복사)
+  course-card.html   카드 4장 (받은 그대로 쓴다)
+  css/card.css       카드 모양. .course-card.selected = 초록 테두리 (받은 그대로 쓴다)
+  js/card.js         비어 있다. 슬라이드 ⑨ ~ ⑪ 코드를 직접 친다
+
+도전 과제 (마지막)
+- s1/day01/challenge.html : basics.html을 복사해서 script src만 js/challenge.js로 바꾼다
+- s1/day01/js/challenge.js : 슬라이드의 문장을 읽고 직접 쓴다. Console 결과가 슬라이드와 같으면 성공
