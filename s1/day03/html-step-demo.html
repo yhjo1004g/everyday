@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시연: 변수 tableHtml에 쌓이는 모습</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Malgun Gothic", "Noto Sans KR", sans-serif; background: #f4f6f8; color: #1f2a44; }
+  header { display: flex; align-items: center; gap: 16px; padding: 14px 24px; background: #1f2a44; color: white; }
+  header h1 { font-size: 22px; margin: 0; flex: 1; }
+  .state { font-size: 20px; font-family: Consolas, monospace; background: #2f3d5f; padding: 6px 14px; border-radius: 6px; }
+  .count { font-size: 16px; opacity: .85; }
+  .pick a { color: #cfe0ff; margin-left: 10px; font-size: 14px; }
+  .pick a.on { color: white; font-weight: 700; text-decoration: none; }
+  main { display: grid; grid-template-columns: 1.05fr 1fr 0.8fr; gap: 16px; padding: 16px 24px; }
+  section { background: white; border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.08); min-height: 420px; }
+  section h2 { font-size: 15px; margin: 0 0 10px; color: #56607a; }
+  pre.code { max-height: 62vh; overflow: auto; margin: 0; font-family: Consolas, "D2Coding", monospace; font-size: 17px; line-height: 1.65; }
+  pre.code span { display: block; padding: 0 8px; border-radius: 4px; white-space: pre; }
+  pre.code span.now { background: #fff1a8; outline: 2px solid #e8c200; }
+  pre.code span .no { display: inline-block; width: 2em; color: #9aa3b5; }
+  pre.code span.c { color: #8a94a8; }
+  .str { max-height: 40vh; overflow: auto; font-family: Consolas, "D2Coding", monospace; font-size: 18px; line-height: 1.7; word-break: break-all; background: #f8f9fb; border: 1px solid #dfe3ea; border-radius: 6px; padding: 10px 12px; min-height: 160px; }
+  .str .old { color: #1f2a44; }
+  .str mark { background: #ffe066; color: #1f2a44; padding: 1px 2px; border-radius: 3px; }
+  .str .q { color: #c0392b; }
+  .added { margin-top: 12px; font-size: 16px; }
+  .added code { font-family: Consolas, monospace; font-size: 18px; background: #ffe066; padding: 2px 6px; border-radius: 4px; }
+  .note { margin-top: 12px; font-size: 15px; color: #56607a; line-height: 1.5; }
+  .preview table { border-collapse: collapse; }
+  .preview th, .preview td { border: 1px solid #999; padding: 6px 12px; font-size: 18px; white-space: nowrap; }
+  .preview { overflow: auto; }
+  body.wide main { grid-template-columns: 1fr 0.75fr 1.15fr; }
+  body.wide .preview th, body.wide .preview td { font-size: 14px; padding: 4px 8px; }
+  .preview .empty { color: #9aa3b5; font-size: 15px; }
+  .preview.real { outline: 3px solid #2e9e5b; outline-offset: 6px; border-radius: 4px; }
+  .tag { display: inline-block; font-size: 13px; padding: 2px 8px; border-radius: 10px; background: #e7ebf3; color: #56607a; margin-bottom: 8px; }
+  .tag.real { background: #2e9e5b; color: white; }
+  footer { display: flex; justify-content: center; gap: 10px; padding: 4px 24px 18px; }
+  button { font-size: 18px; padding: 8px 18px; border-radius: 8px; border: 1px solid #c6ccd8; background: white; cursor: pointer; }
+  button.main { background: #1f6feb; color: white; border-color: #1f6feb; min-width: 140px; }
+  button:disabled { opacity: .4; cursor: default; }
+  .hint { text-align: center; font-size: 13px; color: #8a94a8; padding-bottom: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">변수 tableHtml에 쌓이는 모습</h1>
+  <div class="state" id="state">-</div>
+  <div class="count" id="count"></div>
+  <div class="pick"><a href="?demo=table33" id="pk-table33">3×3 표</a><a href="?demo=course" id="pk-course">수강신청표</a></div>
+</header>
+<main>
+  <section>
+    <h2>코드: 지금 실행하는 줄</h2>
+    <pre class="code" id="code"></pre>
+  </section>
+  <section>
+    <h2>변수 tableHtml에 담긴 글자</h2>
+    <div class="str" id="str"></div>
+    <div class="added" id="added"></div>
+    <div class="note" id="note"></div>
+  </section>
+  <section>
+    <h2 id="pvTitle">지금 글자를 화면에 그리면</h2>
+    <div id="pvTag" class="tag">아직 화면에 넣기 전 (그려 본 모습)</div>
+    <div class="preview" id="preview"></div>
+  </section>
+</main>
+<footer>
+  <button id="first">처음</button>
+  <button id="prev">◀ 이전</button>
+  <button id="next" class="main">다음 ▶</button>
+  <button id="last">끝</button>
+</footer>
+<div class="hint">키보드: → 또는 Space 다음, ← 이전, Home 처음, End 끝</div>
+
+<script>
+// 시연 데이터. 코드 줄과, 줄마다 tableHtml에 붙는 조각을 실제 반복 순서대로 만든다.
+const DEMOS = {
+  course: {
+    title: "변수 tableHtml에 쌓이는 모습: 수강신청표 (도전 8)",
+    code: [
+      '// (배열 7개는 위에 있다: headers, codes, names, credits, days, times, capacities)',
+      'let tableHtml = \'<table class="course-table">\';',
+      'tableHtml = tableHtml + "<caption>개설 과목</caption>";',
+      '',
+      'tableHtml = tableHtml + "<thead><tr>";',
+      'for (let i = 0; i < headers.length; i++) {',
+      '  tableHtml = tableHtml + "<th>" + headers[i] + "</th>";',
+      '}',
+      'tableHtml = tableHtml + "</tr></thead>";',
+      '',
+      'let total = 0;',
+      'tableHtml = tableHtml + "<tbody>";',
+      'for (let i = 0; i < codes.length; i++) {',
+      '  tableHtml = tableHtml + "<tr>";',
+      '  tableHtml = tableHtml + "<td>" + codes[i] + "</td>";',
+      '  tableHtml = tableHtml + "<td>" + names[i] + "</td>";',
+      '  tableHtml = tableHtml + \'<td class="num">\' + credits[i] + "</td>";',
+      '  tableHtml = tableHtml + "<td>" + days[i] + "</td>";',
+      '  if (i % 2 === 0) {',
+      '    tableHtml = tableHtml + \'<td rowspan="2">\' + times[i / 2] + "</td>";',
+      '  }',
+      '  tableHtml = tableHtml + \'<td class="num">\' + capacities[i] + "</td>";',
+      '  tableHtml = tableHtml + "</tr>";',
+      '  total = total + credits[i];',
+      '}',
+      'tableHtml = tableHtml + "</tbody>";',
+      'tableHtml = tableHtml + \'<tfoot><tr><th colspan="2">총 학점</th>\';',
+      'tableHtml = tableHtml + \'<td class="num">\' + total + "</td>";',
+      'tableHtml = tableHtml + \'<td colspan="3"></td></tr></tfoot>\';',
+      'tableHtml = tableHtml + "</table>";',
+      'document.querySelector("#area").innerHTML = tableHtml;',
+    ],
+    steps() {
+      const headers = ["과목코드", "과목명", "학점", "요일", "시간", "정원"];
+      const codes = ["CS101", "CS102", "DB201", "CS103"];
+      const names = ["웹 프로그래밍 기초", "자바 입문", "데이터베이스", "알고리즘 기초"];
+      const credits = [3, 3, 2, 2];
+      const days = ["월", "화", "수", "목"];
+      const times = ["09:00-12:00", "13:00-15:00"];
+      const capacities = [30, 30, 25, 25];
+      const s = [];
+      s.push({ line: 1, add: '<table class="course-table">', vars: "", note: "처음 값 담기: 표를 연다 (class는 작은따옴표 안의 큰따옴표)" });
+      s.push({ line: 2, add: "<caption>개설 과목</caption>", vars: "", note: "표 제목" });
+      s.push({ line: 4, add: "<thead><tr>", vars: "", note: "머리글 줄을 연다" });
+      for (let i = 0; i < headers.length; i++) s.push({ line: 6, add: "<th>" + headers[i] + "</th>", vars: "i = " + i, note: "머리글 칸 " + (i + 1) + " / " + headers.length });
+      s.push({ line: 8, add: "</tr></thead>", vars: "", note: "머리글 줄 끝" });
+      let total = 0;
+      s.push({ line: 10, add: "", vars: "total = 0", note: "합계를 담을 변수는 반복 밖에서 0으로" });
+      s.push({ line: 11, add: "<tbody>", vars: "", note: "본문을 연다" });
+      for (let i = 0; i < codes.length; i++) {
+        const v = "i = " + i;
+        s.push({ line: 13, add: "<tr>", vars: v, note: (i + 1) + "번째 과목 줄을 연다" });
+        s.push({ line: 14, add: "<td>" + codes[i] + "</td>", vars: v, note: "과목코드" });
+        s.push({ line: 15, add: "<td>" + names[i] + "</td>", vars: v, note: "과목명" });
+        s.push({ line: 16, add: '<td class="num">' + credits[i] + "</td>", vars: v, note: "학점 (오른쪽 정렬 class)" });
+        s.push({ line: 17, add: "<td>" + days[i] + "</td>", vars: v, note: "요일" });
+        if (i % 2 === 0) s.push({ line: 19, add: '<td rowspan="2">' + times[i / 2] + "</td>", vars: v + ", i % 2 = 0", note: "짝수 줄(i = " + i + "): 시간 칸을 두 줄 높이로. times[" + (i / 2) + "]" });
+        else s.push({ line: 18, add: "", vars: v + ", i % 2 = 1", note: "홀수 줄(i = " + i + "): 위 줄의 시간 칸이 내려와 있으니 넣지 않는다" });
+        s.push({ line: 21, add: '<td class="num">' + capacities[i] + "</td>", vars: v, note: "정원" });
+        s.push({ line: 22, add: "</tr>", vars: v, note: "과목 줄 끝" });
+        total += credits[i];
+        s.push({ line: 23, add: "", vars: v + ", total = " + total, note: "학점을 더한다: total = " + total });
+      }
+      s.push({ line: 25, add: "</tbody>", vars: "total = " + total, note: "본문 끝" });
+      s.push({ line: 26, add: '<tfoot><tr><th colspan="2">총 학점</th>', vars: "total = " + total, note: "꼬리 줄: 앞의 두 칸을 합친 머리글" });
+      s.push({ line: 27, add: '<td class="num">' + total + "</td>", vars: "total = " + total, note: "합계 칸" });
+      s.push({ line: 28, add: '<td colspan="3"></td></tr></tfoot>', vars: "", note: "남은 세 칸(요일 · 시간 · 정원)을 합친 빈칸" });
+      s.push({ line: 29, add: "</table>", vars: "", note: "글자 덩어리 완성. 아직은 그냥 글자일 뿐이다" });
+      s.push({ line: 30, add: "", vars: "", note: "innerHTML: 이 글자를 #area 안에 HTML로 넣는다 → 이제 화면에 표가 생긴다", render: true });
+      return s;
+    },
+  },
+  table33: {
+    title: "변수 tableHtml에 쌓이는 모습: for로 3×3 표 (8)",
+    code: [
+      '// 8. for로 3×3 표 만들기',
+      'let tableHtml = "<table>";',
+      '',
+      'for (let i = 1; i <= 3; i++) {',
+      '  tableHtml = tableHtml + "<tr>";',
+      '  for (let j = 1; j <= 3; j++) {',
+      '    tableHtml = tableHtml + "<td>" + i + "-" + j + "</td>";',
+      '  }',
+      '  tableHtml = tableHtml + "</tr>";',
+      '}',
+      '',
+      'tableHtml = tableHtml + "</table>";',
+      'document.querySelector("#area").innerHTML = tableHtml;',
+    ],
+    steps() {
+      const s = [];
+      s.push({ line: 1, add: "<table>", vars: "", note: "처음 값 담기: tableHtml은 이제 \"<table>\"" });
+      for (let i = 1; i <= 3; i++) {
+        s.push({ line: 4, add: "<tr>", vars: "i = " + i, note: "바깥 for " + i + "바퀴: 줄을 연다" });
+        for (let j = 1; j <= 3; j++) {
+          s.push({ line: 6, add: "<td>" + i + "-" + j + "</td>", vars: "i = " + i + ", j = " + j, note: "안쪽 for " + j + "바퀴: 칸 하나. i와 j가 글자로 이어 붙는다" });
+        }
+        s.push({ line: 8, add: "</tr>", vars: "i = " + i, note: "안쪽 for가 다 돌았다 → 줄을 닫는다" + (i < 3 ? ". 이제 i가 " + (i + 1) + "로" : ". 바깥 for도 끝") });
+      }
+      s.push({ line: 11, add: "</table>", vars: "", note: "글자 덩어리 완성. 아직은 그냥 글자일 뿐이다" });
+      s.push({ line: 12, add: "", vars: "", note: "innerHTML: 이 글자를 #area 안에 HTML로 넣는다 → 이제 화면에 표가 생긴다", render: true });
+      return s;
+    },
+  },
+};
+
+const demoKey = DEMOS[new URLSearchParams(location.search).get("demo")] ? new URLSearchParams(location.search).get("demo") : "table33";
+const demo = DEMOS[demoKey];
+document.getElementById("pk-" + demoKey).classList.add("on");
+if (demoKey === "course") document.body.classList.add("wide");
+const steps = demo.steps();
+let tableHtml = ""; steps.forEach((st) => { st.before = tableHtml; tableHtml += st.add; st.after = tableHtml; });
+let k = 0;
+
+const $ = (id) => document.getElementById(id);
+const esc = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+$("title").textContent = demo.title;
+document.title = "시연: " + demo.title;
+
+function show() {
+  const st = steps[k];
+  $("count").textContent = "걸음 " + (k + 1) + " / " + steps.length;
+  $("state").textContent = st.vars || "반복 밖";
+  $("code").innerHTML = demo.code.map((c, n) =>
+    '<span class="' + (n === st.line ? "now" : "") + (c.trim().startsWith("//") ? " c" : "") + '"><span class="no">' + (n + 1) + "</span>" + esc(c || " ") + "</span>").join("");
+  $("str").innerHTML = '<span class="q">"</span><span class="old">' + esc(st.before) + "</span>" + (st.add ? "<mark>" + esc(st.add) + "</mark>" : "") + '<span class="q">"</span>';
+  $("added").innerHTML = st.add ? "이번에 붙은 것: <code>" + esc(st.add) + "</code>" : "이번에는 붙는 것이 없다";
+  $("note").textContent = st.note;
+  const now = $("code").querySelector(".now"); if (now) now.scrollIntoView({ block: "nearest" });
+  $("str").scrollTop = $("str").scrollHeight;
+  const pv = $("preview");
+  pv.innerHTML = st.after ? st.after : '<span class="empty">(아직 비어 있다)</span>';
+  if (pv.querySelector("table") && !pv.querySelector("td")) pv.insertAdjacentHTML("beforeend", '<div class="empty">표는 열렸지만 칸이 아직 없다</div>');
+  pv.classList.toggle("real", !!st.render);
+  $("pvTag").textContent = st.render ? "실제 화면 #area" : "아직 화면에 넣기 전 (그려 본 모습)";
+  $("pvTag").className = "tag" + (st.render ? " real" : "");
+  $("pvTitle").textContent = st.render ? "화면에 들어갔다" : "지금 글자를 화면에 그리면";
+  $("first").disabled = $("prev").disabled = k === 0;
+  $("next").disabled = $("last").disabled = k === steps.length - 1;
+}
+$("next").onclick = () => { if (k < steps.length - 1) { k++; show(); } };
+$("prev").onclick = () => { if (k > 0) { k--; show(); } };
+$("first").onclick = () => { k = 0; show(); };
+$("last").onclick = () => { k = steps.length - 1; show(); };
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); $("next").click(); }
+  if (e.key === "ArrowLeft") $("prev").click();
+  if (e.key === "Home") $("first").click();
+  if (e.key === "End") $("last").click();
+});
+show();
+</script>
+</body>
+</html>
